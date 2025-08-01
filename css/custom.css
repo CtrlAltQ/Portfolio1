@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+body { background-color: #0a0a0f; color: #fff; scroll-behavior: smooth; }
+.gradient-text {
+  background: linear-gradient(90deg, #00ff88 0%, #0066ff 50%, #ff0066 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 1.1s cubic-bezier(0.4,0,0.2,1) both;
+}
+/* Enhanced gradient text hover effect */
+.gradient-text:hover {
+  background: linear-gradient(90deg, #ffffff 0%, #00ff88 50%, #ffffff 100%);
+  filter: brightness(1.15) contrast(1.4) drop-shadow(0 2px 8px #00ff88cc);
+  transition: background 0.9s cubic-bezier(0.4,0,0.2,1), filter 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.hero-animated-text {
+  transition: color 0.7s cubic-bezier(0.4,0,0.2,1), text-shadow 0.7s cubic-bezier(0.4,0,0.2,1);
+  text-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
+}
+.hero-animated-text:hover {
+  color: #ffffff !important;
+  text-shadow: 0 4px 16px rgba(0, 255, 136, 0.6);
+}
+
+/* Improve readability for hero text */
+.hero-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  text-shadow: 0 2px 12px #1a1a2e55;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f8f8f8;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #00ff88;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+nav .font-mono,
+nav .font-bold,
+nav .text-primary {
+  color: #ffffff !important;
+  text-shadow: 0 1px 8px rgba(0, 234, 255, 0.2);
+}
+
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #00ff88 !important;
+}
+
+.nav-link.active {
+  color: #00ff88 !important;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+input, textarea {
+  background-color: #1a1a2e !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(0, 255, 136, 0.4) !important;
+  font-weight: 500;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #00ff88 !important;
+  box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1) !important;
+  outline: none !important;
+}
+::selection { background-color: #00ff88; color: #0a0a0f; }
+
+/* Enhanced Mobile Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
+  
+  .project-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .project-card img {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  /* Improve button sizing on mobile */
+  .px-6 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  /* Better spacing for mobile */
+  section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .text-3xl {
+    font-size: 1.75rem;
+  }
+  
+  .grid-cols-1 {
+    gap: 1rem;
+  }
+}
+
+/* Enhanced hover effects for better interactivity */
+.project-card {
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 234, 255, 0.1);
+}
+
+/* Improved button styles */
+button, .px-6.py-3 {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover, .px-6.py-3:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 234, 255, 0.2);
+}
+
+/* Loading animation for better UX */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improve text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* GitHub Integration Styles */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Enhanced project card styles for GitHub integration */
+#projects-container .project-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #1a1b20 100%);
+  border: 1px solid rgba(0, 234, 255, 0.1);
+}
+
+#projects-container .project-card:hover {
+  border-color: rgba(0, 234, 255, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 234, 255, 0.15);
+}
+
+/* GitHub icon styling */
+.fab.fa-github {
+  background: linear-gradient(135deg, #00ff88 0%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Language tag improvements */
+.project-card .bg-dark {
+  background-color: rgba(17, 18, 22, 0.8) !important;
+  backdrop-filter: blur(4px);
+}
+
+/* Error and loading states */
+.text-red-400 { color: #f87171; }
+.bg-red-900 { background-color: #7f1d1d; }
+.border-red-500 { border-color: #ef4444; }
+.text-red-100 { color: #fecaca; }
+.bg-green-900 { background-color: #14532d; }
+.border-green-500 { border-color: #22c55e; }
+.text-green-100 { color: #dcfce7; }
