@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML-in-Canvas | CtrlAltQ Blog</title>
+    <meta name="description" content="# HTML-in-Canvas: Cooking Up Visuals in the Cyberpunk Kitchen...">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/custom.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ffffff',
+                        primaryLight: '#f8f8f8',
+                        dark: '#0a0a0f',
+                        darkLight: '#1a1a2e',
+                        accent: '#00ff88',
+                        secondary: '#0066ff',
+                        tertiary: '#ff0066',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-dark text-primary">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-dark bg-opacity-90 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="../../index.html" class="cyber-logo h-10 flex items-center">
+                            <svg width="40" height="40" viewBox="0 0 40 40" class="mr-3">
+                                <!-- Chef Hat -->
+                                <path d="M20 8c-3 0-5.5 1.5-5.5 3.5 0 0.5 0.2 1 0.5 1.4C13 13.5 12 15 12 17c0 2.5 2 4.5 4.5 4.5h7c2.5 0 4.5-2 4.5-4.5 0-2-1-3.5-3-4.1 0.3-0.4 0.5-0.9 0.5-1.4C25.5 9.5 23 8 20 8z" fill="#ffffff" opacity="0.9"/>
+                                <!-- Hat Band -->
+                                <rect x="14" y="20" width="12" height="2" fill="#00ff88"/>
+                                
+                                <!-- Skull -->
+                                <circle cx="20" cy="28" r="8" fill="none" stroke="#00ff88" stroke-width="1.5"/>
+                                <!-- Eye sockets -->
+                                <circle cx="17" cy="26" r="1.5" fill="#ff0066"/>
+                                <circle cx="23" cy="26" r="1.5" fill="#ff0066"/>
+                                <!-- Nasal cavity -->
+                                <path d="M20 28 L18.5 31 L21.5 31 Z" fill="none" stroke="#00ff88" stroke-width="1"/>
+                                <!-- Jaw -->
+                                <path d="M15 31 Q20 34 25 31" fill="none" stroke="#00ff88" stroke-width="1"/>
+                                <!-- Teeth -->
+                                <line x1="18" y1="31" x2="18" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                                <line x1="20" y1="31" x2="20" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                                <line x1="22" y1="31" x2="22" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                            </svg>
+                            <span class="cyber-logo-text font-mono font-bold text-xl tracking-wider">CtrlAltQ</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="../../index.html" class="nav-link text-primary px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="../../index.html#about" class="nav-link text-primary px-3 py-2 text-sm font-medium">About</a>
+                        <a href="../../index.html#work" class="nav-link text-primary px-3 py-2 text-sm font-medium">Work</a>
+                        <a href="../index.html" class="nav-link text-accent px-3 py-2 text-sm font-medium">Blog</a>
+                        <a href="../../index.html#contact" class="nav-link text-primary px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Post Header -->
+    <section class="pt-32 pb-16 bg-dark relative overflow-hidden">
+        <div class="cyber-grid absolute inset-0 opacity-20"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-8">
+                <div class="flex items-center justify-center space-x-4 mb-4">
+                    <span class="px-3 py-1 bg-accent/20 text-accent text-sm rounded-full border border-accent/30">Tutorial</span>
+                    <span class="text-gray-400 text-sm">August 2, 2025</span>
+                    <span class="text-gray-400 text-sm">3 min read</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-primary">HTML-in-Canvas</h1>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"># HTML-in-Canvas: Cooking Up Visuals in the Cyberpunk Kitchen...</p>
+            </div>
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-secondary flex items-center justify-center">
+                        <span class="font-mono font-bold text-dark">JC</span>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-semibold text-primary">Jeremy (CtrlAltQ)</p>
+                        <p class="text-sm text-gray-400">Chef → Developer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Post Content -->
+    <article class="py-16 bg-darkLight">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="prose prose-invert prose-lg max-w-none">
+                <!-- Post content goes here -->
+                
+        <div class="prose prose-invert prose-lg max-w-none">
+          <p class="mb-6 leading-relaxed"># HTML-in-Canvas: Cooking Up Visuals in the Cyberpunk Kitchen</p><p class="mb-6 leading-relaxed">Alright, fellow code savants and punk rock rebels. Jeremy here, coming at you straight from the pixelated underbelly of cyberpunk cuisine where coding is as essential as a good chef's knife. We’ve got an exciting new ingredient on the table to spice up our front-end development: HTML-in-Canvas. So grab that VR headset, crank the volume on your favorite punk anthem, and let's dive into this digital feast together!</p><p class="mb-6 leading-relaxed">### Key Insights</p><p class="mb-6 leading-relaxed">First off, let’s get down to the nitty-gritty. HTML-in-Canvas is a slick proposal by the WICG team that lets you render HTML elements directly onto a canvas in all its glory. Imagine, if you will, the canvas as your high-tech kitchen countertop and HTML as the fresh ingredients. Why limit ourselves to just one cooking style when we can blend them all together? This approach not only opens up new avenues for creative rendering but also gives us finer control over the styling and interaction of web elements.</p><p class="mb-6 leading-relaxed">In traditional web development, you'd typically separate your heads (HTML) from your bodies (Canvas). You place some barebones SVG or a mesmerizing bitmap, but the magic of HTML-in-Canvas lets us mix those flavors. By allowing HTML to enter into the canvas, we can bake in interactivity and maintain that rich, responsive quality we crave.</p><p class="mb-6 leading-relaxed">### Practical Application</p><p class="mb-6 leading-relaxed">Now, before you rush off thinking you’re ready to join the next cyberpunk cook-off armed with just this new technology, let’s break it down with a practical lens. As someone who spent years plating exquisite dishes before whipping up code, I know that the key to any successful venture in the kitchen—or on the dev scene—is all in the preparation.</p><p class="mb-6 leading-relaxed">1. **Learn the Basics**: Get familiar with requestAnimationFrame and the HTML Canvas API. Treat them like your mise en place — know your tools and ingredients before you start throwing things in the pot.</p><p class="mb-6 leading-relaxed">2. **Rendering Elements**: Start simple. Grab a div element and render it to canvas. You don’t need to go deep into the neon-soaked abyss right away. Just like in cooking, you want to ensure your base flavors are balanced before adding the wild spices.</p><p class="mb-6 leading-relaxed">3. **Interaction Mastery**: Think about how you want your audience to interact with the elements. Clicking should feel like a juicy bite, not a stale cracker. Make sure to handle events appropriately using the canvas context, ensuring all your layers meld together seamlessly.</p><p class="mb-6 leading-relaxed">4. **Combine Ingredients**: Once you’re comfortable, layer on complexity. Add graphics, transition effects, or interactions to create a sensory experience. This is where you go full punk: the louder, the better! </p><p class="mb-6 leading-relaxed">### Conclusion</p><p class="mb-6 leading-relaxed">So, there you have it, rebels and code chefs. HTML-in-Canvas isn’t just another tool in your digital toolbox; it’s a disruptive force in the web development scene that lets you concoct visually striking and engaging experiences that truly resonate with your audience. </p><p class="mb-6 leading-relaxed">In the kitchen—or the virtual streets of a cyberpunk landscape—experimentation is key. Let’s cook up some rebellious code that gives users a feast for their senses. So why not head over to the [HTML-in-Canvas GitHub repo](https://github.com/WICG/html-in-canvas) and see what kind of mess you can create? And check out the discussions blowing up over on [Hacker News](https://news.ycombinator.com/item?id=44772177); you might just find inspiration to twist these concepts into your next radical project.</p><p class="mb-6 leading-relaxed">Now go out there and make some delicious code! 🖤🧑‍🍳🚀</p>
+          
+          <div class="mt-12 p-6 bg-gray-800 rounded-lg border border-accent/20">
+            <p class="text-sm text-gray-400 mb-2">
+              <i class="fas fa-link mr-2"></i>
+              Original article: <a href="https://github.com/WICG/html-in-canvas" target="_blank" class="text-accent hover:text-white">HTML-in-Canvas</a>
+            </p>
+            <p class="text-sm text-gray-400">
+              🤖 This post was crafted by <strong>AltQ</strong>, my automated blog system.<br>
+              Want a site powered by automation like this? <a href="../../index.html#contact" class="text-accent hover:text-white">Let's build yours →</a>
+            </p>
+          </div>
+        </div>
+      
+            </div>
+            
+            <!-- Tags -->
+            <div class="mt-12 pt-8 border-t border-gray-800">
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-gray-800 text-gray-400 text-sm rounded-full border border-gray-700">dev</span> <span class="px-3 py-1 bg-gray-800 text-gray-400 text-sm rounded-full border border-gray-700">automated</span> <span class="px-3 py-1 bg-gray-800 text-gray-400 text-sm rounded-full border border-gray-700">tech-insights</span>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Navigation -->
+    <section class="py-16 bg-dark border-t border-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="inline-flex items-center text-accent hover:text-white transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to Blog
+                </a>
+                <div class="flex space-x-4">
+                    <!-- Previous/Next post navigation will go here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-800 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="cyber-logo h-8 flex items-center">
+                        <svg width="32" height="32" viewBox="0 0 40 40" class="mr-2">
+                            <!-- Chef Hat -->
+                            <path d="M20 8c-3 0-5.5 1.5-5.5 3.5 0 0.5 0.2 1 0.5 1.4C13 13.5 12 15 12 17c0 2.5 2 4.5 4.5 4.5h7c2.5 0 4.5-2 4.5-4.5 0-2-1-3.5-3-4.1 0.3-0.4 0.5-0.9 0.5-1.4C25.5 9.5 23 8 20 8z" fill="#ffffff" opacity="0.9"/>
+                            <!-- Hat Band -->
+                            <rect x="14" y="20" width="12" height="2" fill="#00ff88"/>
+                            
+                            <!-- Skull -->
+                            <circle cx="20" cy="28" r="8" fill="none" stroke="#00ff88" stroke-width="1.5"/>
+                            <!-- Eye sockets -->
+                            <circle cx="17" cy="26" r="1.5" fill="#ff0066"/>
+                            <circle cx="23" cy="26" r="1.5" fill="#ff0066"/>
+                            <!-- Nasal cavity -->
+                            <path d="M20 28 L18.5 31 L21.5 31 Z" fill="none" stroke="#00ff88" stroke-width="1"/>
+                            <!-- Jaw -->
+                            <path d="M15 31 Q20 34 25 31" fill="none" stroke="#00ff88" stroke-width="1"/>
+                            <!-- Teeth -->
+                            <line x1="18" y1="31" x2="18" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                            <line x1="20" y1="31" x2="20" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                            <line x1="22" y1="31" x2="22" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                        </svg>
+                        <span class="cyber-logo-text font-mono font-bold text-lg tracking-wider">CtrlAltQ</span>
+                    </div>
+                </div>
+                <div class="text-primary text-sm">
+                    © 2025 CtrlAltQ. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/cyber-shimeji.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++26 Reflections adventures and compile time UML | CtrlAltQ Blog</title>
+    <meta name="description" content="### C++26 Reflections Adventures and Compile-Time UML...">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/custom.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ffffff',
+                        primaryLight: '#f8f8f8',
+                        dark: '#0a0a0f',
+                        darkLight: '#1a1a2e',
+                        accent: '#00ff88',
+                        secondary: '#0066ff',
+                        tertiary: '#ff0066',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-dark text-primary">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-dark bg-opacity-90 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="../../index.html" class="cyber-logo h-10 flex items-center">
+                            <svg width="40" height="40" viewBox="0 0 40 40" class="mr-3">
+                                <!-- Chef Hat -->
+                                <path d="M20 8c-3 0-5.5 1.5-5.5 3.5 0 0.5 0.2 1 0.5 1.4C13 13.5 12 15 12 17c0 2.5 2 4.5 4.5 4.5h7c2.5 0 4.5-2 4.5-4.5 0-2-1-3.5-3-4.1 0.3-0.4 0.5-0.9 0.5-1.4C25.5 9.5 23 8 20 8z" fill="#ffffff" opacity="0.9"/>
+                                <!-- Hat Band -->
+                                <rect x="14" y="20" width="12" height="2" fill="#00ff88"/>
+                                
+                                <!-- Skull -->
+                                <circle cx="20" cy="28" r="8" fill="none" stroke="#00ff88" stroke-width="1.5"/>
+                                <!-- Eye sockets -->
+                                <circle cx="17" cy="26" r="1.5" fill="#ff0066"/>
+                                <circle cx="23" cy="26" r="1.5" fill="#ff0066"/>
+                                <!-- Nasal cavity -->
+                                <path d="M20 28 L18.5 31 L21.5 31 Z" fill="none" stroke="#00ff88" stroke-width="1"/>
+                                <!-- Jaw -->
+                                <path d="M15 31 Q20 34 25 31" fill="none" stroke="#00ff88" stroke-width="1"/>
+                                <!-- Teeth -->
+                                <line x1="18" y1="31" x2="18" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                                <line x1="20" y1="31" x2="20" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                                <line x1="22" y1="31" x2="22" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                            </svg>
+                            <span class="cyber-logo-text font-mono font-bold text-xl tracking-wider">CtrlAltQ</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="../../index.html" class="nav-link text-primary px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="../../index.html#about" class="nav-link text-primary px-3 py-2 text-sm font-medium">About</a>
+                        <a href="../../index.html#work" class="nav-link text-primary px-3 py-2 text-sm font-medium">Work</a>
+                        <a href="../index.html" class="nav-link text-accent px-3 py-2 text-sm font-medium">Blog</a>
+                        <a href="../../index.html#contact" class="nav-link text-primary px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Post Header -->
+    <section class="pt-32 pb-16 bg-dark relative overflow-hidden">
+        <div class="cyber-grid absolute inset-0 opacity-20"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-8">
+                <div class="flex items-center justify-center space-x-4 mb-4">
+                    <span class="px-3 py-1 bg-accent/20 text-accent text-sm rounded-full border border-accent/30">Tutorial</span>
+                    <span class="text-gray-400 text-sm">August 2, 2025</span>
+                    <span class="text-gray-400 text-sm">3 min read</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-primary">C++26 Reflections adventures and compile time UML</h1>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">### C++26 Reflections Adventures and Compile-Time UML...</p>
+            </div>
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-4">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-secondary flex items-center justify-center">
+                        <span class="font-mono font-bold text-dark">JC</span>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-semibold text-primary">Jeremy (CtrlAltQ)</p>
+                        <p class="text-sm text-gray-400">Chef → Developer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Post Content -->
+    <article class="py-16 bg-darkLight">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="prose prose-invert prose-lg max-w-none">
+                <!-- Post content goes here -->
+                
+        <div class="prose prose-invert prose-lg max-w-none">
+          <p class="mb-6 leading-relaxed">### C++26 Reflections Adventures and Compile-Time UML</p><p class="mb-6 leading-relaxed">Hey there, cyberpunks and code-slingers! It’s Jeremy here, your former chef-turned-developer, and I’m ready to dive into some gnarly code concepts from the depths of C++26—where the reflection is sharp and the compiler doesn’t mess around! If you’ve ever felt the rush of mixing ingredients just right in the kitchen or the thrill of dominating a StarCraft match, then buckle up, because we’re going on a wild ride through the code kitchen of the future.</p><p class="mb-6 leading-relaxed">#### Key Insights from C++26 Reflections</p><p class="mb-6 leading-relaxed">Let’s kick it off with the meat of our discourse: C++26 reflections and compile-time UML. If you’ve ever tried to whip up a exquisite dish without a proper recipe, you know how it feels to work in the dark. C++26 is here to hand you a flashlight, letting you peek into the innards of your types at compile time. This is huge! Imagine being able to dissect your code just like you would a ribeye steak, understanding each muscle and sinew before it hits the grill (or in our case, the runtime).</p><p class="mb-6 leading-relaxed">Reflection provides a way to introspect types: it allows your code to query itself like a punk band querying its next gig. Want to flow your types dynamically but still keep that hard-hitting compile-time performance? Reflection is your secret sauce. It’s not just some soft jazz in the background; it’s the iconic opening riff of a legendary punk anthem.</p><p class="mb-6 leading-relaxed">Another radical feature of C++26 is the ability to create compile-time UML diagrams. Think of it as building a visual representation of your kitchen layout before you even chop a vegetable. Keeping track of relationships and processes has never been smoother. Your dependencies become more manageable, and—like a perfectly timed mosh pit—you’ll know when to jump in, or simply let things simmer.</p><p class="mb-6 leading-relaxed">#### Practical Application</p><p class="mb-6 leading-relaxed">Okay, now let’s get down to the nitty-gritty! How can these insights serve you in your day-to-day coding kitchen? Here’s a recipe for success using C++26 features:</p><p class="mb-6 leading-relaxed">1. **Master Reflection**: Start integrating reflection in your codebase. Think of it like mise en place—the practice of gathering and organizing all your ingredients before you cook. Use reflection to ensure your classes and functions are set up correctly, and make sure your APIs don’t end up like a sour soufflé.</p><p class="mb-6 leading-relaxed">2. **Compile-Time UML**: Build compile-time UML diagrams to visualize your projects. This can be particularly invaluable when you’re architecting large systems. Remember, good design is as crucial as good timing in the kitchen. If you can map out your code structure during development, you can avoid the dreaded spaghetti mess of tangled classes and dependencies.</p><p class="mb-6 leading-relaxed">3. **Refactor with Confidence**: With reflections, refactoring your code becomes less frightening. Like a chef adjusting seasoning throughout a dish, you can modify structures safely, knowing they’re still in alignment. This can lead to cleaner, more maintainable code—keeping your project fresh and ready for the next big thing.</p><p class="mb-6 leading-relaxed">#### Conclusion: Your Next Steps</p><p class="mb-6 leading-relaxed">Whether you’re still perfecting that punk rock spaghetti or you’re deep into crafting complex software systems, C++26’s reflections and compile-time UML are your new kitchen gadgets—high-tech, essential, and fully ripe for innovation. So, what’s holding you back? Leap into the chaos of code and embrace these new features. </p><p class="mb-6 leading-relaxed">If you want to explore these ideas further, check out the full article on [Reachable Code](https://www.reachablecode.com/2025/07/31/c26-reflections-adventures-compile-time-uml/) and dive into the conversation over on [Hacker News](https://news.ycombinator.com/item?id=44772917). Let’s stir the pot, remix our code, and keep pushing the boundaries of what we can create in this digital kitchen we call programming.</p><p class="mb-6 leading-relaxed">Stay punk, stay coding! 🤘</p>
+          
+          <div class="mt-12 p-6 bg-gray-800 rounded-lg border border-accent/20">
+            <p class="text-sm text-gray-400 mb-2">
+              <i class="fas fa-link mr-2"></i>
+              Original article: <a href="https://www.reachablecode.com/2025/07/31/c26-reflections-adventures-compile-time-uml/" target="_blank" class="text-accent hover:text-white">C++26 Reflections adventures and compile time UML</a>
+            </p>
+            <p class="text-sm text-gray-400">
+              🤖 This post was crafted by <strong>AltQ</strong>, my automated blog system.<br>
+              Want a site powered by automation like this? <a href="../../index.html#contact" class="text-accent hover:text-white">Let's build yours →</a>
+            </p>
+          </div>
+        </div>
+      
+            </div>
+            
+            <!-- Tags -->
+            <div class="mt-12 pt-8 border-t border-gray-800">
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-gray-800 text-gray-400 text-sm rounded-full border border-gray-700">dev</span> <span class="px-3 py-1 bg-gray-800 text-gray-400 text-sm rounded-full border border-gray-700">automated</span> <span class="px-3 py-1 bg-gray-800 text-gray-400 text-sm rounded-full border border-gray-700">tech-insights</span>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Navigation -->
+    <section class="py-16 bg-dark border-t border-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="inline-flex items-center text-accent hover:text-white transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to Blog
+                </a>
+                <div class="flex space-x-4">
+                    <!-- Previous/Next post navigation will go here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-800 bg-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="cyber-logo h-8 flex items-center">
+                        <svg width="32" height="32" viewBox="0 0 40 40" class="mr-2">
+                            <!-- Chef Hat -->
+                            <path d="M20 8c-3 0-5.5 1.5-5.5 3.5 0 0.5 0.2 1 0.5 1.4C13 13.5 12 15 12 17c0 2.5 2 4.5 4.5 4.5h7c2.5 0 4.5-2 4.5-4.5 0-2-1-3.5-3-4.1 0.3-0.4 0.5-0.9 0.5-1.4C25.5 9.5 23 8 20 8z" fill="#ffffff" opacity="0.9"/>
+                            <!-- Hat Band -->
+                            <rect x="14" y="20" width="12" height="2" fill="#00ff88"/>
+                            
+                            <!-- Skull -->
+                            <circle cx="20" cy="28" r="8" fill="none" stroke="#00ff88" stroke-width="1.5"/>
+                            <!-- Eye sockets -->
+                            <circle cx="17" cy="26" r="1.5" fill="#ff0066"/>
+                            <circle cx="23" cy="26" r="1.5" fill="#ff0066"/>
+                            <!-- Nasal cavity -->
+                            <path d="M20 28 L18.5 31 L21.5 31 Z" fill="none" stroke="#00ff88" stroke-width="1"/>
+                            <!-- Jaw -->
+                            <path d="M15 31 Q20 34 25 31" fill="none" stroke="#00ff88" stroke-width="1"/>
+                            <!-- Teeth -->
+                            <line x1="18" y1="31" x2="18" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                            <line x1="20" y1="31" x2="20" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                            <line x1="22" y1="31" x2="22" y2="33" stroke="#ffffff" stroke-width="0.5"/>
+                        </svg>
+                        <span class="cyber-logo-text font-mono font-bold text-lg tracking-wider">CtrlAltQ</span>
+                    </div>
+                </div>
+                <div class="text-primary text-sm">
+                    © 2025 CtrlAltQ. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/cyber-shimeji.js"></script>
+</body>
+</html>
