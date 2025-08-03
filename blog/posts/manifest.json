@@ -1,0 +1,54 @@
+{
+  "posts": [
+    {
+      "slug": "chef-to-developer-journey",
+      "title": "From Sauté Pans to Code Pans: A Chef's Journey",
+      "excerpt": "Twenty years of burning hands, late nights, and perfectionist tendencies in professional kitchens taught me more about programming than any bootcamp ever could. Here's how the chaos of the kitchen translates to clean code.",
+      "category": "Personal",
+      "date": "2025-02-01",
+      "tags": ["career", "chef", "developer", "journey"],
+      "author": "Jeremy (CtrlAltQ)",
+      "status": "coming-soon"
+    },
+    {
+      "slug": "vonnegut-developer-author",
+      "title": "Why Kurt Vonnegut is the Ultimate Developer's Author",
+      "excerpt": "\"So it goes\" - on debugging, fatalism, and finding humor in the absurdity of technology. How Vonnegut's worldview perfectly captures the developer experience.",
+      "category": "Literature",
+      "date": "2025-01-28",
+      "tags": ["vonnegut", "literature", "philosophy", "debugging"],
+      "author": "Jeremy (CtrlAltQ)",
+      "status": "coming-soon"
+    },
+    {
+      "slug": "bukowski-code-failures",
+      "title": "Bukowski, Code, and Beautiful Failures",
+      "excerpt": "What a drunk poet taught me about embracing imperfection and shipping anyway. Sometimes the messiest code teaches us the most about resilience.",
+      "category": "Literature",
+      "date": "2025-01-20",
+      "tags": ["bukowski", "failure", "philosophy", "shipping"],
+      "author": "Jeremy (CtrlAltQ)",
+      "status": "coming-soon"
+    }
+  ],
+  "categories": [
+    "Personal",
+    "Literature", 
+    "Tutorial",
+    "Career",
+    "Philosophy"
+  ],
+  "tags": [
+    "career",
+    "chef",
+    "developer",
+    "journey",
+    "vonnegut",
+    "literature",
+    "philosophy",
+    "debugging",
+    "bukowski",
+    "failure",
+    "shipping"
+  ]
+}
