@@ -338,4 +338,86 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     window.githubPortfolio.loadProjects();
   }, 1000);
+  
+  // Initialize personal section interactions
+  initPersonalInteractions();
 });
+
+// Personal section interactive features
+function initPersonalInteractions() {
+  // Music progress bar animation
+  const musicBar = document.querySelector('.music-progress-bar');
+  if (musicBar) {
+    setInterval(() => {
+      const currentWidth = parseInt(musicBar.style.width) || 65;
+      const newWidth = currentWidth + Math.random() * 2 - 1; // Random fluctuation
+      musicBar.style.width = Math.max(0, Math.min(100, newWidth)) + '%';
+    }, 2000);
+  }
+  
+  // Status indicator interactions
+  const statusIndicators = document.querySelectorAll('.status-indicator');
+  statusIndicators.forEach(indicator => {
+    indicator.addEventListener('click', () => {
+      indicator.style.transform = 'translateX(8px)';
+      setTimeout(() => {
+        indicator.style.transform = 'translateX(4px)';
+      }, 150);
+    });
+  });
+  
+  // Genre card interactions
+  const genreCards = document.querySelectorAll('.cyber-genre-card');
+  genreCards.forEach(card => {
+    card.addEventListener('click', () => {
+      // Add a click effect
+      card.style.transform = 'translateY(-4px) scale(1.05)';
+      setTimeout(() => {
+        card.style.transform = 'translateY(-2px)';
+      }, 200);
+    });
+  });
+  
+  // Coffee level updater (just for fun)
+  const coffeeLevel = document.querySelector('.status-indicator:nth-child(3) .text-purple-400');
+  if (coffeeLevel) {
+    setInterval(() => {
+      const levels = ['25%', '50%', '75%', '85%', '100%', '☕ Empty!'];
+      const currentLevel = coffeeLevel.textContent;
+      let nextIndex = levels.indexOf(currentLevel) + 1;
+      if (nextIndex >= levels.length) nextIndex = 0;
+      coffeeLevel.textContent = levels[nextIndex];
+    }, 10000); // Update every 10 seconds
+  }
+}
+
+// Enhanced scroll animations for new sections
+const advancedObserverOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+const advancedObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('animate-fade-in');
+        
+        // Special animations for specific elements
+        if (entry.target.classList.contains('holo-card')) {
+          entry.target.style.transform = 'translateY(0)';
+          entry.target.style.opacity = '1';
+        }
+        
+        if (entry.target.classList.contains('cyber-timeline-item')) {
+          entry.target.style.animationDelay = `${index * 100}ms`;
+          entry.target.classList.add('animate-fade-in-left');
+        }
+      }, index * 100);
+    }
+  });
+}, advancedObserverOptions);
+
+// Observe new elements
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.holo-card, .cyber-timeline-item, .cyber-genre-card').forEach(el => {
+    advancedObserver.observe(el);
+  });
+});
+
