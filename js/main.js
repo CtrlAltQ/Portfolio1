@@ -257,10 +257,10 @@ class GitHubPortfolio {
             ${languageTags}
           </div>
           <div class="flex space-x-3">
+            ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-accent text-dark font-medium text-sm rounded hover:bg-opacity-90 transition-colors">View Live Site →</a>` : `<a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-accent text-dark font-medium text-sm rounded hover:bg-opacity-90 transition-colors">View Project →</a>`}
             <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="text-primary font-medium text-sm hover:text-accent transition-colors">
-              View Code →
+              Source Code →
             </a>
-            ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="text-primary font-medium text-sm hover:text-accent transition-colors">Live Demo →</a>` : ''}
           </div>
         </div>
       </div>
