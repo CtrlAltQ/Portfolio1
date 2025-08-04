@@ -455,8 +455,6 @@ class PortfolioModeSwitcher {
 
     trackModeSelection(mode) {
         // Analytics tracking would go here
-        console.log(`Mode selected: ${mode}`);
-        
         // Example: Google Analytics event
         if (typeof gtag !== 'undefined') {
             gtag('event', 'mode_selection', {
@@ -470,7 +468,7 @@ class PortfolioModeSwitcher {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    window.portfolioModeSwithcer = new PortfolioModeSwitcher();
+    window.portfolioModeSwitcher = new PortfolioModeSwitcher();
 });
 
 // Export for external use
