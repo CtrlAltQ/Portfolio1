@@ -432,7 +432,7 @@ class PortfolioModeSwitcher {
     updateModeToggleText(mode) {
         const modeText = document.getElementById('current-mode-text');
         if (modeText) {
-            modeText.textContent = mode === 'business' ? 'Business Mode' : 'Fun Mode';
+            modeText.textContent = mode === 'business' ? 'Switch to Fun Mode' : 'Switch to Business Mode';
         }
     }
 
