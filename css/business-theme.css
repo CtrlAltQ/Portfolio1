@@ -1,0 +1,369 @@
+/* Business Mode Theme Overrides */
+
+/* Base Business Mode Styles */
+.business-mode {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --success-color: #27ae60;
+    --text-color: #2c3e50;
+    --text-light: #7f8c8d;
+    --text-muted: #95a5a6;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-accent: #ecf0f1;
+    --border-color: #e9ecef;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+}
+
+/* Background and Base */
+.business-mode body {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    color: var(--text-color);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Remove Vanta.js background in business mode */
+.business-mode #vanta-bg {
+    display: none;
+}
+
+/* Add professional background pattern */
+.business-mode #home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 25% 25%, rgba(44, 62, 80, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(52, 73, 94, 0.05) 0%, transparent 50%);
+    z-index: 1;
+}
+
+/* Navigation */
+.business-mode nav {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.business-mode .nav-link {
+    color: var(--text-color) !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.business-mode .nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+/* Remove glitch effects */
+.business-mode .glitch-hover {
+    animation: none !important;
+}
+
+.business-mode .glitch-hover::before {
+    display: none;
+}
+
+/* Logo */
+.business-mode .cyber-logo-text {
+    background: var(--primary-color);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--primary-color) !important;
+    text-shadow: none;
+}
+
+/* Hero Section */
+.business-mode .hero-title {
+    color: var(--text-color);
+    text-shadow: none;
+    font-weight: 800;
+}
+
+.business-mode .hero-subtitle {
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+.business-mode .gradient-text {
+    background: var(--accent-color);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--accent-color) !important;
+}
+
+.business-mode .gradient-text:hover {
+    background: var(--primary-color);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--primary-color) !important;
+}
+
+/* Buttons */
+.business-mode .cta-button,
+.business-mode .btn-primary {
+    background: var(--accent-color);
+    border: none;
+    color: white;
+    box-shadow: 0 4px 15px var(--shadow-light);
+    transition: all 0.3s ease;
+}
+
+.business-mode .cta-button:hover,
+.business-mode .btn-primary:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+/* Cards */
+.business-mode .card,
+.business-mode .project-card,
+.business-mode .skill-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px var(--shadow-light);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.business-mode .card:hover,
+.business-mode .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px var(--shadow-medium);
+}
+
+/* Sections */
+.business-mode section {
+    background: transparent;
+}
+
+.business-mode .section-title {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+.business-mode .section-subtitle {
+    color: var(--text-light);
+}
+
+/* Skills Section */
+.business-mode .skill-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.business-mode .skill-progress {
+    background: var(--bg-accent);
+}
+
+.business-mode .skill-progress-fill {
+    background: var(--accent-color);
+}
+
+/* Projects */
+.business-mode .project-title {
+    color: var(--text-color);
+}
+
+.business-mode .project-description {
+    color: var(--text-light);
+}
+
+.business-mode .project-tech {
+    background: var(--bg-secondary);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+/* Hide Labs section in business mode */
+.business-mode .labs-section,
+.business-mode a[href*="labs"] {
+    display: none !important;
+}
+
+/* Footer */
+.business-mode footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-light);
+}
+
+/* Hide business sections by default, show only in business mode */
+.testimonials-section,
+.resume-section {
+    display: none;
+}
+
+/* Testimonials Section (Business Mode Only) */
+.business-mode .testimonials-section {
+    display: block;
+    background: var(--bg-secondary);
+    padding: 80px 0;
+}
+
+.testimonial-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+}
+
+.testimonial-quote {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.testimonial-author {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.testimonial-role {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Professional Resume Section */
+.business-mode .resume-section {
+    display: block;
+    background: var(--bg-primary);
+    padding: 80px 0;
+}
+
+.resume-download {
+    background: linear-gradient(135deg, var(--accent-color), #c0392b);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+.resume-download:hover {
+    background: linear-gradient(135deg, #c0392b, var(--accent-color));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+    text-decoration: none;
+    color: white;
+}
+
+/* Contact Section Enhancements */
+.business-mode .contact-section {
+    background: var(--bg-secondary);
+}
+
+.business-mode .contact-form {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.business-mode .form-input {
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 12px 16px;
+    transition: border-color 0.3s ease;
+}
+
+.business-mode .form-input:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Transform Shimeji for business mode */
+.business-mode #cyber-shimeji,
+.business-mode .cyber-shimeji {
+    /* Keep the shimeji but make it business appropriate */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .business-mode .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .business-mode .testimonial-card,
+    .business-mode .contact-form {
+        padding: 20px;
+    }
+}
+
+/* Animation overrides - make them more subtle */
+.business-mode * {
+    animation-duration: 0.3s !important;
+}
+
+.business-mode .animate-fade-in-left {
+    animation: businessFadeIn 0.6s ease-out both;
+}
+
+@keyframes businessFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Professional color scheme for various elements */
+.business-mode .text-accent {
+    color: var(--accent-color) !important;
+}
+
+.business-mode .border-accent {
+    border-color: var(--accent-color) !important;
+}
+
+.business-mode .bg-accent {
+    background-color: var(--accent-color) !important;
+}
+
+/* Override any remaining neon/cyberpunk colors */
+.business-mode [style*="#00ff88"],
+.business-mode [style*="#ff0066"],
+.business-mode [style*="#0066ff"] {
+    color: var(--text-color) !important;
+}
+
+.business-mode .text-green-400,
+.business-mode .text-pink-400,
+.business-mode .text-blue-400 {
+    color: var(--text-color) !important;
+}
+
+.business-mode .border-green-400,
+.business-mode .border-pink-400,
+.business-mode .border-blue-400 {
+    border-color: var(--border-color) !important;
+}

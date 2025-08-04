@@ -1,0 +1,295 @@
+/* Mode Switcher and Welcome Modal Styles */
+
+/* Welcome Modal */
+.welcome-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.welcome-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.welcome-modal-content {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 2px solid #00ff88;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 255, 136, 0.3);
+}
+
+.welcome-modal-content::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #00ff88, #0066ff, #ff0066, #00ff88);
+    background-size: 400% 400%;
+    border-radius: 22px;
+    z-index: -1;
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.welcome-modal h2 {
+    color: #00ff88;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    font-family: 'Fira Code', monospace;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.welcome-modal p {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.mode-button {
+    padding: 15px 30px;
+    border: 2px solid;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 180px;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.mode-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.mode-button:hover::before {
+    left: 100%;
+}
+
+.business-button {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    border-color: #3498db;
+    color: #ecf0f1;
+}
+
+.business-button:hover {
+    background: linear-gradient(135deg, #34495e, #3498db);
+    box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
+    transform: translateY(-2px);
+}
+
+.fun-button {
+    background: linear-gradient(135deg, #ff0066, #ff6600);
+    border-color: #00ff88;
+    color: #ffffff;
+}
+
+.fun-button:hover {
+    background: linear-gradient(135deg, #ff6600, #00ff88);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+    transform: translateY(-2px);
+}
+
+.mode-button i {
+    font-size: 1.3rem;
+}
+
+.welcome-subtitle {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 1.5rem;
+    font-style: italic;
+}
+
+/* Mode Transition Overlay */
+.mode-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+.mode-transition.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.transition-content {
+    text-align: center;
+    color: #00ff88;
+}
+
+.transition-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.loading-dots {
+    display: inline-block;
+}
+
+.loading-dots::after {
+    content: '';
+    animation: loadingDots 1.5s infinite;
+}
+
+@keyframes loadingDots {
+    0% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+    100% { content: ''; }
+}
+
+/* Mode Toggle (persistent switcher) */
+.mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #333;
+    border-radius: 25px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mode-toggle:hover {
+    background: rgba(0, 0, 0, 0.95);
+    border-color: #00ff88;
+    color: #00ff88;
+}
+
+.mode-toggle i {
+    font-size: 0.9rem;
+}
+
+/* Business Mode Styles */
+.business-mode .welcome-modal-content {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-color: #3498db;
+    color: #2c3e50;
+    box-shadow: 0 20px 60px rgba(52, 152, 219, 0.2);
+}
+
+.business-mode .welcome-modal h2 {
+    color: #2c3e50;
+    text-shadow: none;
+}
+
+.business-mode .welcome-modal p {
+    color: #34495e;
+}
+
+.business-mode .mode-toggle {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #ddd;
+    color: #666;
+}
+
+.business-mode .mode-toggle:hover {
+    border-color: #3498db;
+    color: #3498db;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-modal-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .welcome-modal h2 {
+        font-size: 2rem;
+    }
+    
+    .mode-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .mode-button {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .mode-toggle {
+        bottom: 15px;
+        right: 15px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Animation for mode switch */
+.page-fade-out {
+    opacity: 0;
+    transform: scale(0.98);
+    transition: all 0.5s ease;
+}
+
+.page-fade-in {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.5s ease;
+}

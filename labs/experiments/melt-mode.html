@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melt Mode | AltQ Labs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/custom.css">
+    <link rel="stylesheet" href="../css/labs-core.css">
+    <style>
+        .melt-element {
+            transition: all 0.3s ease;
+        }
+        
+        .melting {
+            filter: url(#melt-filter);
+            animation: meltDown 3s ease-in forwards;
+        }
+        
+        @keyframes meltDown {
+            0% { transform: translateY(0) scaleY(1); }
+            50% { transform: translateY(20px) scaleY(1.2); }
+            100% { transform: translateY(100vh) scaleY(2) rotateX(45deg); opacity: 0; }
+        }
+        
+        .drip {
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(to bottom, transparent, #ff3333);
+            animation: drip 2s ease-in forwards;
+            z-index: 1000;
+        }
+        
+        @keyframes drip {
+            0% { height: 0; opacity: 1; }
+            100% { height: 200px; opacity: 0; }
+        }
+        
+        .emergency-stop {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            background: #ff3333;
+            border: 3px solid #ffff00;
+            color: white;
+            padding: 20px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(255, 51, 51, 0.8);
+            animation: pulse 0.5s infinite alternate;
+            display: none;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 50px rgba(255, 51, 51, 0.8); }
+            100% { box-shadow: 0 0 80px rgba(255, 51, 51, 1); }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ffffff',
+                        dark: '#0a0a0f',
+                        darkLight: '#1a1a2e',
+                        accent: '#00ff88',
+                        secondary: '#0066ff',
+                        tertiary: '#ff0066',
+                        warning: '#ffff00',
+                        danger: '#ff3333'
+                    },
+                    fontFamily: {
+                        mono: ['Fira Code', 'Courier New', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-mono bg-black text-red-400 overflow-hidden">
+    <!-- SVG Filters -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <filter id="melt-filter">
+                <feTurbulence baseFrequency="0.9" numOctaves="4" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="20"/>
+                <feGaussianBlur stdDeviation="2"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Emergency Stop Button -->
+    <button id="emergency-stop" class="emergency-stop">
+        <i class="fas fa-stop-circle mr-3"></i>
+        EMERGENCY STOP!
+        <div class="text-sm mt-2">STOP THE MELTING!</div>
+    </button>
+
+    <!-- Terminal Header -->
+    <div class="terminal-header p-4 border-b border-red-400 melt-element">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+                <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+                <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
+                <span class="text-red-400 text-sm">MELT-MODE-ACTIVE v1.0.0</span>
+            </div>
+            <a href="../index.html" class="text-red-400 hover:text-red-300 transition-colors">
+                <i class="fas fa-times"></i> ABORT
+            </a>
+        </div>
+    </div>
+
+    <!-- Warning Banner -->
+    <div class="bg-red-600 text-white p-4 text-center border-b border-red-400 melt-element">
+        <div class="text-lg font-bold">
+            <i class="fas fa-fire mr-2"></i>
+            MELT MODE ACTIVATED - REALITY BECOMING FLUID
+            <i class="fas fa-fire ml-2"></i>
+        </div>
+        <div class="text-sm mt-1">WARNING: ALL ELEMENTS WILL MELT IN 5 SECONDS</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Title -->
+        <div class="text-center mb-8 melt-element">
+            <h1 class="text-4xl font-bold text-red-400 mb-4">🔥 MELT MODE 🔥</h1>
+            <p class="text-xl text-gray-300">Watch as reality becomes fluid and everything melts away...</p>
+        </div>
+
+        <!-- Sample Content to Melt -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-darkLight p-6 border border-red-400 rounded melt-element">
+                <h3 class="text-xl font-bold text-red-400 mb-3">Sample Card 1</h3>
+                <p class="text-gray-300 mb-4">This card will melt in a few seconds. Watch as it becomes fluid and drips down the screen.</p>
+                <button class="bg-red-600 px-4 py-2 rounded text-white">Button to Melt</button>
+            </div>
+
+            <div class="bg-darkLight p-6 border border-yellow-400 rounded melt-element">
+                <h3 class="text-xl font-bold text-yellow-400 mb-3">Sample Card 2</h3>
+                <p class="text-gray-300 mb-4">This one will also melt. Nothing is safe from the melting process.</p>
+                <button class="bg-yellow-600 px-4 py-2 rounded text-white">Another Button</button>
+            </div>
+
+            <div class="bg-darkLight p-6 border border-green-400 rounded melt-element">
+                <h3 class="text-xl font-bold text-green-400 mb-3">Sample Card 3</h3>
+                <p class="text-gray-300 mb-4">Even this green card cannot escape the inevitable melting.</p>
+                <div class="flex space-x-2">
+                    <span class="px-3 py-1 bg-green-600 text-white rounded text-sm">Tag 1</span>
+                    <span class="px-3 py-1 bg-green-600 text-white rounded text-sm">Tag 2</span>
+                </div>
+            </div>
+
+            <div class="bg-darkLight p-6 border border-purple-400 rounded melt-element">
+                <h3 class="text-xl font-bold text-purple-400 mb-3">Sample Card 4</h3>
+                <p class="text-gray-300 mb-4">The final card. It too shall become liquid.</p>
+                <div class="w-full bg-gray-700 rounded-full h-2">
+                    <div class="bg-purple-600 h-2 rounded-full" style="width: 75%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="text-center melt-element">
+            <h3 class="text-2xl font-bold text-red-400 mb-4">Navigation Will Also Melt</h3>
+            <div class="flex justify-center space-x-4 mb-6">
+                <a href="#" class="bg-red-600 px-4 py-2 rounded text-white hover:bg-red-500 transition-colors">Home</a>
+                <a href="#" class="bg-red-600 px-4 py-2 rounded text-white hover:bg-red-500 transition-colors">About</a>
+                <a href="#" class="bg-red-600 px-4 py-2 rounded text-white hover:bg-red-500 transition-colors">Work</a>
+                <a href="#" class="bg-red-600 px-4 py-2 rounded text-white hover:bg-red-500 transition-colors">Contact</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-gray-500 border-t border-red-400 pt-4 melt-element">
+            <p>This footer will melt too. Nothing survives the melt.</p>
+            <p class="mt-2">Experiment by CtrlAltQ | AltQ Labs</p>
+        </div>
+    </div>
+
+    <!-- Countdown Timer -->
+    <div id="countdown" class="fixed top-4 right-4 bg-red-600 text-white px-4 py-2 rounded border border-red-400">
+        <div class="text-center">
+            <div class="text-lg font-bold">MELT IN:</div>
+            <div id="timer" class="text-2xl font-mono">5</div>
+        </div>
+    </div>
+
+    <script src="../js/experiments/melt-mode.js"></script>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throw Rock | AltQ Labs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/custom.css">
+    <link rel="stylesheet" href="../css/labs-core.css">
+    <style>
+        body {
+            cursor: crosshair;
+        }
+        
+        .throwable {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .cracked {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cracked::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.8) 42%, rgba(255, 255, 255, 0.8) 44%, transparent 46%),
+                linear-gradient(-45deg, transparent 40%, rgba(255, 255, 255, 0.8) 42%, rgba(255, 255, 255, 0.8) 44%, transparent 46%),
+                linear-gradient(135deg, transparent 60%, rgba(255, 255, 255, 0.6) 62%, rgba(255, 255, 255, 0.6) 64%, transparent 66%);
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .shattered {
+            animation: shatter 1s ease-out forwards;
+        }
+        
+        @keyframes shatter {
+            0% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+                opacity: 0.7;
+            }
+            100% { 
+                transform: scale(0.8) rotate(15deg) translateY(50px);
+                opacity: 0;
+            }
+        }
+        
+        .rock {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #666 0%, #333 50%, #111 100%);
+            border-radius: 50% 40% 60% 30%;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            pointer-events: none;
+        }
+        
+        .impact {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            border: 3px solid #ffff00;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 0, 0.3) 0%, transparent 70%);
+            animation: impactRing 0.5s ease-out forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        @keyframes impactRing {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .glass-shard {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            z-index: 50;
+        }
+        
+        .score-display {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #ffff00;
+            padding: 15px;
+            border: 2px solid #ffff00;
+            border-radius: 10px;
+            font-family: 'Fira Code', monospace;
+            z-index: 1001;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ffffff',
+                        dark: '#0a0a0f',
+                        darkLight: '#1a1a2e',
+                        accent: '#00ff88',
+                        secondary: '#0066ff',
+                        tertiary: '#ff0066',
+                        warning: '#ffff00',
+                        danger: '#ff3333'
+                    },
+                    fontFamily: {
+                        mono: ['Fira Code', 'Courier New', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-mono bg-black text-yellow-400 min-h-screen">
+    <!-- Score Display -->
+    <div class="score-display">
+        <div class="text-lg font-bold">🎯 DESTRUCTION SCORE</div>
+        <div class="text-2xl" id="score">0</div>
+        <div class="text-sm mt-2">ROCKS THROWN: <span id="rocks-thrown">0</span></div>
+        <div class="text-sm">ELEMENTS HIT: <span id="elements-hit">0</span></div>
+    </div>
+
+    <!-- Terminal Header -->
+    <div class="terminal-header p-4 border-b border-yellow-400 throwable">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="w-3 h-3 rounded-full bg-yellow-500 animate-pulse"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500 animate-pulse"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500 animate-pulse"></div>
+                <span class="text-yellow-400 text-sm">THROW-ROCK-MODE v1.2.1</span>
+            </div>
+            <a href="../index.html" class="text-yellow-400 hover:text-yellow-300 transition-colors">
+                <i class="fas fa-times"></i> EXIT
+            </a>
+        </div>
+    </div>
+
+    <!-- Warning Banner -->
+    <div class="bg-yellow-600 text-black p-4 text-center border-b border-yellow-400 throwable">
+        <div class="text-lg font-bold">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            ROCK THROWING MODE ACTIVE - CLICK ANYWHERE TO THROW
+            <i class="fas fa-exclamation-triangle ml-2"></i>
+        </div>
+        <div class="text-sm mt-1">WARNING: ELEMENTS WILL CRACK AND SHATTER ON IMPACT</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Title -->
+        <div class="text-center mb-8 throwable">
+            <h1 class="text-4xl font-bold text-yellow-400 mb-4">🪨 THROW ROCK MODE 🪨</h1>
+            <p class="text-xl text-gray-300">Click anywhere to throw rocks and watch things shatter!</p>
+        </div>
+
+        <!-- Target Elements -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-darkLight p-6 border border-blue-400 rounded throwable" data-points="10">
+                <h3 class="text-xl font-bold text-blue-400 mb-3">🎯 Easy Target</h3>
+                <p class="text-gray-300 mb-4">A simple target worth 10 points. Easy to hit and satisfying to break.</p>
+                <button class="bg-blue-600 px-4 py-2 rounded text-white throwable" data-points="5">Breakable Button</button>
+            </div>
+
+            <div class="bg-darkLight p-6 border border-green-400 rounded throwable" data-points="20">
+                <h3 class="text-xl font-bold text-green-400 mb-3">🎯 Medium Target</h3>
+                <p class="text-gray-300 mb-4">Worth 20 points. A bit more challenging but still breakable.</p>
+                <div class="flex space-x-2">
+                    <span class="px-3 py-1 bg-green-600 text-white rounded text-sm throwable" data-points="3">Tag 1</span>
+                    <span class="px-3 py-1 bg-green-600 text-white rounded text-sm throwable" data-points="3">Tag 2</span>
+                </div>
+            </div>
+
+            <div class="bg-darkLight p-6 border border-red-400 rounded throwable" data-points="50">
+                <h3 class="text-xl font-bold text-red-400 mb-3">🎯 Hard Target</h3>
+                <p class="text-gray-300 mb-4">The big prize! 50 points for this challenging target.</p>
+                <div class="w-full bg-gray-700 rounded-full h-4 throwable" data-points="10">
+                    <div class="bg-red-600 h-4 rounded-full throwable" style="width: 75%" data-points="15"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Targets -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-purple-600 p-4 rounded text-white text-center throwable" data-points="25">
+                <i class="fas fa-star text-2xl mb-2"></i>
+                <div>Bonus Target</div>
+            </div>
+            <div class="bg-orange-600 p-4 rounded text-white text-center throwable" data-points="30">
+                <i class="fas fa-diamond text-2xl mb-2"></i>
+                <div>Rare Target</div>
+            </div>
+            <div class="bg-pink-600 p-4 rounded text-white text-center throwable" data-points="35">
+                <i class="fas fa-gem text-2xl mb-2"></i>
+                <div>Precious Target</div>
+            </div>
+            <div class="bg-cyan-600 p-4 rounded text-white text-center throwable" data-points="100">
+                <i class="fas fa-trophy text-2xl mb-2"></i>
+                <div>JACKPOT!</div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="text-center mb-8 throwable">
+            <h3 class="text-2xl font-bold text-yellow-400 mb-4">🎮 How to Play</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-gray-300">
+                <div class="bg-darkLight p-4 rounded border border-gray-600 throwable" data-points="5">
+                    <div class="text-lg font-bold text-yellow-400 mb-2">1. AIM</div>
+                    <p>Move your crosshair cursor over targets</p>
+                </div>
+                <div class="bg-darkLight p-4 rounded border border-gray-600 throwable" data-points="5">
+                    <div class="text-lg font-bold text-yellow-400 mb-2">2. THROW</div>
+                    <p>Click anywhere to throw a rock</p>
+                </div>
+                <div class="bg-darkLight p-4 rounded border border-gray-600 throwable" data-points="5">
+                    <div class="text-lg font-bold text-yellow-400 mb-2">3. SCORE</div>
+                    <p>Watch elements crack and earn points</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-gray-500 border-t border-yellow-400 pt-4 throwable" data-points="1">
+            <p class="throwable" data-points="1">Even this footer can be destroyed! Everything is breakable.</p>
+            <p class="mt-2 throwable" data-points="1">Rock Throwing Experiment by CtrlAltQ | AltQ Labs</p>
+        </div>
+    </div>
+
+    <!-- Instructions Overlay -->
+    <div id="instructions" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
+        <div class="bg-darkLight p-8 border border-yellow-400 rounded text-center max-w-md">
+            <h2 class="text-2xl font-bold text-yellow-400 mb-4">🪨 ROCK THROWING MODE</h2>
+            <div class="text-left space-y-3 text-gray-300 mb-6">
+                <p>• Click anywhere to throw rocks</p>
+                <p>• Hit elements to crack and shatter them</p>
+                <p>• Different targets have different point values</p>
+                <p>• Try to get the highest score possible!</p>
+                <p>• Press ESC anytime to return to Labs</p>
+            </div>
+            <button id="start-throwing" class="bg-yellow-600 text-black px-6 py-3 rounded font-bold hover:bg-yellow-500 transition-colors">
+                START THROWING ROCKS!
+            </button>
+        </div>
+    </div>
+
+    <script src="../js/experiments/throw-rock.js"></script>
+</body>
+</html>

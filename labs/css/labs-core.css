@@ -1,0 +1,300 @@
+/* AltQ Labs Core Styles */
+
+/* Terminal Effects */
+body {
+    background: linear-gradient(45deg, #000000 0%, #0a0a0f 100%);
+    font-family: 'Fira Code', 'Courier New', monospace;
+    color: #00ff88;
+    overflow-x: hidden;
+}
+
+/* ASCII Logo */
+.ascii-logo {
+    font-family: 'Courier New', monospace;
+    white-space: pre;
+    color: #00ff88;
+    text-shadow: 0 0 10px #00ff88;
+    animation: logoGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+    0% { text-shadow: 0 0 10px #00ff88; }
+    100% { text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
+}
+
+/* Typing Animation */
+.typing-text {
+    font-family: 'Fira Code', monospace;
+}
+
+.cursor {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Blinking Status Indicators */
+.blink {
+    animation: statusBlink 2s infinite;
+}
+
+@keyframes statusBlink {
+    0%, 80% { opacity: 1; }
+    81%, 100% { opacity: 0.3; }
+}
+
+/* Experiment Cards */
+.experiment-card {
+    position: relative;
+    cursor: pointer;
+    transform: perspective(1000px) rotateX(0deg);
+    transition: all 0.3s ease;
+}
+
+.experiment-card:hover {
+    transform: perspective(1000px) rotateX(5deg);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+}
+
+.experiment-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.experiment-card:hover::before {
+    opacity: 1;
+}
+
+/* Glitch Effect for Cards */
+.experiment-card.glitch {
+    animation: glitchCard 0.3s ease-in-out;
+}
+
+@keyframes glitchCard {
+    0% { transform: translate(0); }
+    10% { transform: translate(2px, -2px); }
+    20% { transform: translate(-2px, 2px); }
+    30% { transform: translate(2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    50% { transform: translate(2px, -2px); }
+    60% { transform: translate(-2px, 2px); }
+    70% { transform: translate(2px, 2px); }
+    80% { transform: translate(-2px, -2px); }
+    90% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+/* Button Styles */
+.activate-btn {
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.activate-btn:hover {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.activate-btn:active {
+    transform: translateY(0px);
+}
+
+.activate-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.activate-btn:active::after {
+    width: 200px;
+    height: 200px;
+}
+
+/* Control Room Button */
+.control-room-btn {
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    animation: pulseGreen 2s ease-in-out infinite;
+}
+
+@keyframes pulseGreen {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.5); }
+    50% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.8); }
+}
+
+.control-room-btn:hover {
+    animation: none;
+    box-shadow: 0 0 40px rgba(0, 255, 136, 1);
+}
+
+/* Terminal Header */
+.terminal-header {
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+/* Loading Screen */
+#loading-screen {
+    background: radial-gradient(circle, #0a0a0f 0%, #000000 100%);
+}
+
+.loading-bar {
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.loading-progress {
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px #00ff88;
+}
+
+/* Scanlines Effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        transparent 50%, 
+        rgba(0, 255, 136, 0.02) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1000;
+    animation: scanlines 0.1s linear infinite;
+}
+
+@keyframes scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 4px; }
+}
+
+/* Glitch Text Effect */
+.glitch-text {
+    position: relative;
+    color: #00ff88;
+    text-shadow: 0 0 10px #00ff88;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.glitch-text::before {
+    animation: glitchBefore 2s infinite linear alternate-reverse;
+    color: #ff0066;
+    z-index: -1;
+}
+
+.glitch-text::after {
+    animation: glitchAfter 1s infinite linear alternate-reverse;
+    color: #0066ff;
+    z-index: -2;
+}
+
+@keyframes glitchBefore {
+    0% { clip-path: inset(40% 0 61% 0); }
+    5% { clip-path: inset(92% 0 1% 0); }
+    10% { clip-path: inset(43% 0 1% 0); }
+    15% { clip-path: inset(25% 0 58% 0); }
+    20% { clip-path: inset(54% 0 7% 0); }
+    25% { clip-path: inset(58% 0 43% 0); }
+    30% { clip-path: inset(54% 0 18% 0); }
+    35% { clip-path: inset(92% 0 8% 0); }
+    40% { clip-path: inset(63% 0 37% 0); }
+    45% { clip-path: inset(10% 0 85% 0); }
+    50% { clip-path: inset(40% 0 61% 0); }
+    55% { clip-path: inset(92% 0 1% 0); }
+    60% { clip-path: inset(43% 0 1% 0); }
+    65% { clip-path: inset(25% 0 58% 0); }
+    70% { clip-path: inset(54% 0 7% 0); }
+    75% { clip-path: inset(58% 0 43% 0); }
+    80% { clip-path: inset(54% 0 18% 0); }
+    85% { clip-path: inset(92% 0 8% 0); }
+    90% { clip-path: inset(63% 0 37% 0); }
+    95% { clip-path: inset(10% 0 85% 0); }
+    100% { clip-path: inset(40% 0 61% 0); }
+}
+
+@keyframes glitchAfter {
+    0% { clip-path: inset(80% 0 5% 0); }
+    10% { clip-path: inset(54% 0 7% 0); }
+    20% { clip-path: inset(25% 0 58% 0); }
+    30% { clip-path: inset(92% 0 8% 0); }
+    40% { clip-path: inset(43% 0 1% 0); }
+    50% { clip-path: inset(80% 0 5% 0); }
+    60% { clip-path: inset(54% 0 7% 0); }
+    70% { clip-path: inset(25% 0 58% 0); }
+    80% { clip-path: inset(92% 0 8% 0); }
+    90% { clip-path: inset(43% 0 1% 0); }
+    100% { clip-path: inset(80% 0 5% 0); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .ascii-logo {
+        font-size: 8px;
+        line-height: 1.2;
+    }
+    
+    .experiment-card {
+        margin-bottom: 1rem;
+    }
+    
+    .experiment-card:hover {
+        transform: none;
+    }
+    
+    body::before {
+        display: none; /* Disable scanlines on mobile for performance */
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    body::before {
+        display: none;
+    }
+}

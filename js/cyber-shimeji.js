@@ -9,7 +9,25 @@ class CyberShimeji {
     this.stateTimer = 0;
     this.element = null;
     this.speechElement = null;
-    this.phrases = [
+    this.isBusinessMode = document.body.classList.contains('business-mode');
+    
+    // Different phrases for different modes
+    this.phrases = this.isBusinessMode ? [
+      'Strong technical skills 💼',
+      'Download resume for details 📄',
+      'Experienced full-stack developer',
+      'Quality code delivery ✅',
+      'Professional & reliable 🎯',
+      'Ready to contribute immediately',
+      'Check out the portfolio 👆',
+      'Proven leadership experience 💪',
+      'Clean, maintainable code 📋',
+      'Results-driven developer 💯',
+      'Contact for opportunities',
+      '20+ years professional experience',
+      'Team collaboration skills 🤝',
+      'Scalable solutions expert 🏗️'
+    ] : [
       'This dev is AMAZING! 🔥',
       'Download that resume! 📄',
       'StarCraft → Chef → Code master!',
@@ -25,6 +43,7 @@ class CyberShimeji {
       'Serious skills right here 💯',
       'Quality code like quality food 👨‍🍳'
     ];
+    
     this.createShimeji();
     this.startBehavior();
   }
@@ -41,52 +60,135 @@ class CyberShimeji {
       user-select: none;
     `;
     
-    // Create the character
+    // Create the character with mode-specific styling
     const character = document.createElement('div');
-    character.style.cssText = `
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, #00ff88 20%, #0066ff 80%);
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      position: relative;
-      animation: shimejiBob 2s ease-in-out infinite;
-    `;
     
-    // Add eyes
-    const eyes = document.createElement('div');
-    eyes.style.cssText = `
-      position: absolute;
-      top: 15%;
-      left: 20%;
-      width: 8px;
-      height: 8px;
-      background: #fff;
-      border-radius: 50%;
-      box-shadow: 20px 0 0 #fff, 10px 15px 0 -2px #ff0066;
-      animation: shimejiBlink 3s infinite;
-    `;
-    character.appendChild(eyes);
+    if (this.isBusinessMode) {
+      // Professional business character
+      character.style.cssText = `
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        position: relative;
+        animation: shimejiBob 2s ease-in-out infinite;
+        border: 2px solid #3498db;
+      `;
+      
+      // Add professional tie/collar
+      const collar = document.createElement('div');
+      collar.style.cssText = `
+        position: absolute;
+        bottom: 10%;
+        left: 30%;
+        width: 40%;
+        height: 20%;
+        background: #ecf0f1;
+        border-radius: 0 0 50% 50%;
+        border-top: 2px solid #3498db;
+      `;
+      character.appendChild(collar);
+      
+      // Professional eyes
+      const eyes = document.createElement('div');
+      eyes.style.cssText = `
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 6px;
+        height: 6px;
+        background: #2c3e50;
+        border-radius: 50%;
+        box-shadow: 16px 0 0 #2c3e50;
+        animation: shimejiBlink 3s infinite;
+      `;
+      character.appendChild(eyes);
+      
+      // Professional briefcase accessory
+      const briefcase = document.createElement('div');
+      briefcase.style.cssText = `
+        position: absolute;
+        top: -8px;
+        right: -12px;
+        width: 12px;
+        height: 8px;
+        background: #34495e;
+        border: 1px solid #2c3e50;
+        border-radius: 2px;
+      `;
+      character.appendChild(briefcase);
+      
+    } else {
+      // Original cyberpunk character
+      character.style.cssText = `
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, #00ff88 20%, #0066ff 80%);
+        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        position: relative;
+        animation: shimejiBob 2s ease-in-out infinite;
+      `;
+      
+      // Add cyberpunk eyes
+      const eyes = document.createElement('div');
+      eyes.style.cssText = `
+        position: absolute;
+        top: 15%;
+        left: 20%;
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 20px 0 0 #fff, 10px 15px 0 -2px #ff0066;
+        animation: shimejiBlink 3s infinite;
+      `;
+      character.appendChild(eyes);
+    }
     
-    // Create speech bubble
+    // Create speech bubble with mode-specific styling
     this.speechElement = document.createElement('div');
-    this.speechElement.style.cssText = `
-      position: absolute;
-      bottom: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 255, 136, 0.9);
-      color: #0a0a0f;
-      padding: 8px 12px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: bold;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-      margin-bottom: 10px;
-      font-family: 'Fira Code', monospace;
-    `;
+    
+    if (this.isBusinessMode) {
+      this.speechElement.style.cssText = `
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.95);
+        color: #2c3e50;
+        border: 1px solid #3498db;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        margin-bottom: 10px;
+        font-family: 'Inter', sans-serif;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      `;
+    } else {
+      this.speechElement.style.cssText = `
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 255, 136, 0.9);
+        color: #0a0a0f;
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: bold;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        margin-bottom: 10px;
+        font-family: 'Fira Code', monospace;
+      `;
+    }
     
     this.element.appendChild(character);
     this.element.appendChild(this.speechElement);
