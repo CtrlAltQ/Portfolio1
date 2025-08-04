@@ -138,9 +138,15 @@ class PortfolioModeSwitcher {
 
     showWelcomeModal() {
         const modal = document.getElementById('welcome-modal');
-        setTimeout(() => {
-            modal.classList.add('active');
-        }, 500); // Small delay for page load
+        if (modal) {
+            setTimeout(() => {
+                modal.classList.add('active');
+                // Force visibility with inline styles to override any conflicts
+                modal.style.opacity = '1';
+                modal.style.visibility = 'visible';
+                modal.style.zIndex = '10001';
+            }, 100); // Minimal delay for page load
+        }
     }
 
     hideWelcomeModal() {
