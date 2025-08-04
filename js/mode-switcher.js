@@ -12,12 +12,8 @@ class PortfolioModeSwitcher {
         this.createModeToggle();
         this.setupEventListeners();
         
-        // Show modal if no preference exists
-        if (!this.hasSelectedMode) {
-            this.showWelcomeModal();
-        } else {
-            this.applyMode(this.currentMode, false);
-        }
+        // Always show modal on page load
+        this.showWelcomeModal();
     }
 
     checkExistingPreference() {
@@ -88,7 +84,7 @@ class PortfolioModeSwitcher {
                 </div>
                 
                 <p class="welcome-subtitle">
-                    Don't worry - you can switch modes anytime!
+                    You can always switch modes using the toggle button!
                 </p>
             </div>
         `;
@@ -107,8 +103,11 @@ class PortfolioModeSwitcher {
         
         document.body.appendChild(toggle);
         
-        // Initially hide toggle
-        toggle.style.display = 'none';
+        // Show toggle immediately
+        toggle.style.display = 'flex';
+        
+        // Set initial toggle text
+        this.updateModeToggleText(this.currentMode || 'fun');
     }
 
     setupEventListeners() {

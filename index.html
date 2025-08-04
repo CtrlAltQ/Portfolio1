@@ -477,5 +477,16 @@
     
     <!-- Mode Switcher JavaScript -->
     <script src="js/mode-switcher.js"></script>
+    
+    <!-- Temporary: Add ?clear=true to URL to reset, or use browser console -->
+    <script>
+        // Check if URL has clear parameter to reset localStorage
+        if (window.location.search.includes('clear=true')) {
+            localStorage.removeItem('portfolioMode');
+            // Remove the parameter from URL after clearing
+            window.history.replaceState({}, document.title, window.location.pathname);
+            window.location.reload();
+        }
+    </script>
 </body>
 </html>
