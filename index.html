@@ -455,11 +455,14 @@
     <script src="js/cyber-shimeji.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        if (window.VANTA && document.getElementById('vanta-bg')) {
+        // Only initialize Vanta.js on desktop devices for better mobile performance
+        const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (window.VANTA && document.getElementById('vanta-bg') && !isMobile) {
           VANTA.NET({
             el: "#vanta-bg",
             mouseControls: true,
-            touchControls: true,
+            touchControls: false, // Disable touch controls for better performance
             gyroControls: false,
             minHeight: 200.00,
             minWidth: 200.00,
@@ -467,10 +470,17 @@
             scaleMobile: 1.00,
             backgroundColor: 0x0a0a0f,
             color: 0x00ff88,
-            points: 10.00,
-            maxDistance: 20.00,
-            spacing: 15.00
+            points: 8.00, // Reduced from 10 for better performance
+            maxDistance: 18.00, // Reduced from 20
+            spacing: 18.00 // Increased from 15 for better performance
           });
+        } else if (isMobile) {
+          // Add a static gradient background for mobile
+          const vantaBg = document.getElementById('vanta-bg');
+          if (vantaBg) {
+            vantaBg.style.background = 'linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%)';
+            vantaBg.style.opacity = '0.8';
+          }
         }
       });
     </script>

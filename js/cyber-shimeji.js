@@ -355,19 +355,46 @@ class CyberShimeji {
 function initCyberShimeji() {
   console.log('Initializing Cyber Shimeji...', window.innerWidth);
   
+  // Check if device is mobile for better performance
+  const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  // Reduce shimeji activity on mobile devices
+  if (isMobile) {
+    console.log('Mobile device detected - optimizing shimeji behavior');
+  }
+  
   try {
-    // Create shimeji
+    // Create shimeji with mobile optimizations
     const shimeji = new CyberShimeji();
+    
+    // Apply mobile optimizations
+    if (isMobile) {
+      // Reduce update frequency on mobile
+      shimeji.updateInterval = 100; // Slower updates on mobile
+      
+      // Simplify animations
+      const character = shimeji.element.querySelector('div');
+      if (character) {
+        character.style.animationDuration = '3s'; // Slower animation
+      }
+      
+      // Reduce interaction frequency
+      shimeji.interactionChance = 0.1; // Lower chance of reactions
+    }
+    
     console.log('Shimeji created:', shimeji);
     
-    // Add click interactions with page elements
+    // Add click interactions with page elements (optimized for mobile)
     setTimeout(() => {
+      const interactionChance = isMobile ? 0.1 : 0.3; // Reduced interaction on mobile
+      const eventType = isMobile ? 'touchstart' : 'mouseenter'; // Touch events on mobile
+      
       document.querySelectorAll('.holo-card, .project-card, .cyber-genre-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          if (Math.random() < 0.3) { // 30% chance to react
+        card.addEventListener(eventType, () => {
+          if (Math.random() < interactionChance) {
             shimeji.interactWithElement(card);
           }
-        });
+        }, { passive: true }); // Passive event listeners for better mobile performance
       });
     }, 1000);
 
