@@ -1,5 +1,5 @@
 export default [
-  { tag: 'ai', url: 'https://feeds.feedburner.com/VenturebeatAI' },
+  { tag: 'ai', url: 'https://rss.cnn.com/rss/edition.rss' },
   { tag: 'dev', url: 'https://hnrss.org/frontpage' },
   { tag: 'github', url: 'https://github.blog/feed/' },
   { tag: 'ml', url: 'https://www.marktechpost.com/feed/' },

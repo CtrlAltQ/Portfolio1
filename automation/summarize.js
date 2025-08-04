@@ -91,7 +91,7 @@ Length: 400-600 words.`;
     };
 
     // Create HTML content from template
-    const templatePath = path.join(process.cwd(), 'blog', 'post-template.html');
+    const templatePath = path.join(process.cwd(), '..', 'blog', 'post-template.html');
     const template = fs.readFileSync(templatePath, 'utf8');
     
     const htmlContent = template
@@ -125,7 +125,7 @@ Length: 400-600 words.`;
       ).join(' '));
 
     // Save files
-    const postsDir = path.join(process.cwd(), 'blog', 'posts');
+    const postsDir = path.join(process.cwd(), '..', 'blog', 'posts');
     if (!fs.existsSync(postsDir)) {
       fs.mkdirSync(postsDir, { recursive: true });
     }
@@ -149,7 +149,7 @@ Length: 400-600 words.`;
 }
 
 function updateManifest(newPost) {
-  const manifestPath = path.join(process.cwd(), 'blog', 'posts', 'manifest.json');
+  const manifestPath = path.join(process.cwd(), '..', 'blog', 'posts', 'manifest.json');
   let manifest = { posts: [], categories: [], tags: [] };
   
   // Load existing manifest if it exists

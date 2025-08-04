@@ -12,7 +12,7 @@ export default function pushToGit(newPosts) {
     console.log('📤 Pushing new blog posts to Git...');
     
     // Add blog files to git
-    execSync('git add blog/', { stdio: 'inherit', cwd: process.cwd() });
+    execSync('git add ../blog/', { stdio: 'inherit', cwd: process.cwd() });
     
     // Create commit message
     const postTitles = newPosts.map(post => post.title).join(', ');
