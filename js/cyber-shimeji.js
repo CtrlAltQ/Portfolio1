@@ -64,36 +64,38 @@ class CyberShimeji {
     const character = document.createElement('div');
     
     if (this.isBusinessMode) {
-      // Professional business character
+      // Professional business character - sleek and modern
       character.style.cssText = `
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-        border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        border-radius: 50%;
         position: relative;
         animation: shimejiBob 2s ease-in-out infinite;
-        border: 2px solid #3498db;
+        border: 3px solid #ecf0f1;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
       `;
       
-      // Add professional tie/collar
-      const collar = document.createElement('div');
-      collar.style.cssText = `
+      // Modern professional face
+      const face = document.createElement('div');
+      face.style.cssText = `
         position: absolute;
-        bottom: 10%;
-        left: 30%;
-        width: 40%;
-        height: 20%;
+        top: 15%;
+        left: 15%;
+        width: 70%;
+        height: 70%;
         background: #ecf0f1;
-        border-radius: 0 0 50% 50%;
-        border-top: 2px solid #3498db;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       `;
-      character.appendChild(collar);
       
-      // Professional eyes
+      // Professional eyes - friendly and approachable
       const eyes = document.createElement('div');
       eyes.style.cssText = `
         position: absolute;
-        top: 25%;
+        top: 30%;
         left: 25%;
         width: 6px;
         height: 6px;
@@ -102,21 +104,44 @@ class CyberShimeji {
         box-shadow: 16px 0 0 #2c3e50;
         animation: shimejiBlink 3s infinite;
       `;
-      character.appendChild(eyes);
+      face.appendChild(eyes);
       
-      // Professional briefcase accessory
-      const briefcase = document.createElement('div');
-      briefcase.style.cssText = `
+      // Friendly smile
+      const smile = document.createElement('div');
+      smile.style.cssText = `
         position: absolute;
-        top: -8px;
-        right: -12px;
-        width: 12px;
-        height: 8px;
-        background: #34495e;
-        border: 1px solid #2c3e50;
-        border-radius: 2px;
+        top: 55%;
+        left: 30%;
+        width: 40%;
+        height: 15%;
+        border: 2px solid #2c3e50;
+        border-top: none;
+        border-radius: 0 0 20px 20px;
       `;
-      character.appendChild(briefcase);
+      face.appendChild(smile);
+      
+      character.appendChild(face);
+      
+      // Professional badge/credential indicator
+      const credential = document.createElement('div');
+      credential.style.cssText = `
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 16px;
+        height: 16px;
+        background: #27ae60;
+        border: 2px solid #ecf0f1;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8px;
+        color: white;
+        font-weight: bold;
+      `;
+      credential.innerHTML = '✓';
+      character.appendChild(credential);
       
     } else {
       // Original cyberpunk character

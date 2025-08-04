@@ -182,10 +182,13 @@
     border: 1px solid var(--border-color);
 }
 
-/* Hide Labs section in business mode */
-.business-mode .labs-section,
+/* Keep Labs visible in business mode but style it professionally */
 .business-mode a[href*="labs"] {
-    display: none !important;
+    color: var(--text-color) !important;
+}
+
+.business-mode a[href*="labs"]:hover {
+    color: var(--accent-color) !important;
 }
 
 /* Footer */

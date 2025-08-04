@@ -363,14 +363,8 @@ class PortfolioModeSwitcher {
     }
 
     updateNavigation(mode) {
-        const labsLink = document.querySelector('a[href*="labs"]');
-        if (labsLink) {
-            if (mode === 'business') {
-                labsLink.style.display = 'none';
-            } else {
-                labsLink.style.display = 'block';
-            }
-        }
+        // Labs is now visible in both modes - no hiding needed
+        // Just ensure proper styling is applied via CSS
     }
 
     handleSpecialFeatures(mode) {
