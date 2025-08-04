@@ -13,9 +13,12 @@ class PortfolioModeSwitcher {
         this.setupEventListeners();
         
         // Show modal if no preference exists
+        console.log('Should show modal?', !this.hasSelectedMode);
         if (!this.hasSelectedMode) {
+            console.log('Showing welcome modal...');
             this.showWelcomeModal();
         } else {
+            console.log('Applying saved mode:', this.currentMode);
             this.applyMode(this.currentMode, false);
         }
     }
@@ -23,6 +26,7 @@ class PortfolioModeSwitcher {
     checkExistingPreference() {
         // Check localStorage for existing preference
         const savedMode = localStorage.getItem('portfolioMode');
+        console.log('Saved mode:', savedMode);
         if (savedMode && (savedMode === 'business' || savedMode === 'fun')) {
             this.currentMode = savedMode;
             this.hasSelectedMode = true;
@@ -41,6 +45,8 @@ class PortfolioModeSwitcher {
         if (!this.hasSelectedMode) {
             this.smartModeDetection();
         }
+        
+        console.log('Final state - hasSelectedMode:', this.hasSelectedMode, 'currentMode:', this.currentMode);
     }
 
     smartModeDetection() {
